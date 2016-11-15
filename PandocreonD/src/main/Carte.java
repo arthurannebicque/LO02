@@ -5,6 +5,7 @@ public class Carte extends Joueur{
 	private int origineCarte;
 	private int natureCarte1, natureCarte2, natureCarte3;
 	private int croyantPosable , croyantRecuperable;
+	private String nom;
 	
 	// 0:aucun, 1:nature , 2: chaos , 3: symboles , 4: mystique, 5: humain
 	// 0: aucune, 1: jour , 2: néant, 3: nuit 4: aube 5: crépuscule 
@@ -18,12 +19,14 @@ public class Carte extends Joueur{
 		natureCarte3=0;
 		croyantPosable=0;
 		croyantRecuperable=0;
+		nom="";
 		
 		
 	}
 
 	// Constructeur de la classe Carte
-	public Carte(int pid, int porigine, int pdogme1 , int pdogme2, int pdogme3, int pcroyantPosable, int pcroyantRecuperable){
+	public Carte(String pnom, int pid, int porigine, int pdogme1 , int pdogme2, int pdogme3, int pcroyantPosable, int pcroyantRecuperable){
+		this.nom = pnom;
 		this.identifiantCarte = pid;
 		this.origineCarte = porigine;
 		this.natureCarte1 = pdogme1;

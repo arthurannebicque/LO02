@@ -1,7 +1,4 @@
 package main;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,9 +6,13 @@ import java.util.Collections;
 
 public class Partie{
 	
-	private int resultatDe;
 	int nombre,nombre2, nombreJoueur;
 	private Carte carte;
+	private Divinite carteDivinite;
+	private Apocalypse carteApocalypse;
+	private DeusEx carteDeusEx;
+	private Croyant carteCroyant;
+	private Guide carteGuide;
 	private Joueur player;
 	private ArrayList<Carte> collectionCarte;
 	private ArrayList<Carte> collectionCarteDivinite;
@@ -39,282 +40,289 @@ public class Partie{
 		collectionCarteDivinite = new ArrayList<Carte>();
 		//System.out.println("La méthode a été lancée");
 		carte = new Carte();
+		carteDivinite = new Divinite();
+		carteApocalypse = new Apocalypse();
+		carteDeusEx = new DeusEx();
+		carteCroyant = new Croyant();
+		carteGuide = new Guide();
 		
-		carte = new Carte(1,1,4,1,5,1,0);
-		collectionCarte.add(carte);
 		
-		carte = new Carte(2,1,2,5,4,2,0);
-		collectionCarte.add(carte);
+
+		carteCroyant = new Croyant("Moines",1,1,4,1,5,1,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(3,1,2,4,3,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Moines",2,1,2,5,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(4,1,3,1,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Moines",3,1,2,4,3,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(5,1,2,1,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Moines",4,1,3,1,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(6,1,2,5,3,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Moines",5,1,2,1,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(7,1,3,1,5,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Travailleurs",6,1,2,5,3,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(8,1,2,5,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Travailleurs",7,1,3,1,5,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(9,1,2,5,4,1,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Travailleurs",8,1,2,5,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(10,1,3,1,4,1,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Ermite",9,1,2,5,4,1,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(11,1,2,1,5,1,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Ermite",10,1,3,1,4,1,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(12,1,3,1,5,4,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Integriste",11,1,2,1,5,1,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(13,1,2,5,3,4,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Guerriers Saints",12,1,3,1,5,4,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(14,3,4,1,5,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Diplomates",13,1,2,5,3,4,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(15,3,2,5,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Demons",14,3,4,1,5,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(16,3,2,4,3,2,0);
+		carteCroyant = new Croyant("Demons",15,3,2,5,4,2,0);
 		collectionCarte.add(carte);
 		
-		carte = new Carte(17,3,3,1,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Demons",16,3,2,4,3,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(18,3,2,1,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Demons",17,3,3,1,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(19,3,2,1,3,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Demons",18,3,2,1,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(20,3,2,1,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Alchimistes",19,3,2,1,3,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(21,3,2,1,3,2,0);
+		carteCroyant = new Croyant("Alchimistes",20,3,2,1,4,2,0);
 		collectionCarte.add(carte);
 		
-		carte = new Carte(22,3,3,1,5,1,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Alchimistes",21,3,2,1,3,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(23,3,2,5,4,1,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Vampire",22,3,3,1,5,1,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(24,3,2,1,5,4,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Vampire",23,3,2,5,4,1,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(25,3,3,1,4,4,0);
+		carteCroyant = new Croyant("Lycanthropes",24,3,2,1,5,4,0);
 		collectionCarte.add(carte);
 		
-		carte = new Carte(26,3,2,5,3,4,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Pillards",25,3,3,1,4,4,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(27,2,4,1,5,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Illusionnistes",26,3,2,5,3,4,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(28,2,2,5,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Esprits",27,2,4,1,5,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(29,2,2,4,3,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Esprits",28,2,2,5,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(30,2,3,1,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Esprits",29,2,2,4,3,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(31,2,2,1,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Esprits",30,2,3,1,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(32,2,2,5,3,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Esprits",31,2,2,1,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(33,2,3,1,5,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Alienes",32,2,2,5,3,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(34,2,2,5,4,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Alienes",33,2,3,1,5,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(35,2,4,1,5,1,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Alienes",34,2,2,5,4,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(36,2,2,5,3,2,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Revenant",35,2,4,1,5,1,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(37,2,2,4,3,4,0);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Revolutionnaires",36,2,2,5,3,2,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(38,1,0,5,1,0,2);
-		collectionCarte.add(carte);
+		carteCroyant = new Croyant("Nihillistes",37,2,2,4,3,4,0);
+		collectionCarte.add(carteCroyant);
 		
-		carte = new Carte(39,3,0,3,5,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Martyr",38,1,0,5,1,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(40,2,0,2,1,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Martyr",39,3,0,3,5,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(41,1,0,2,5,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Martyr",40,2,0,2,1,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(42,3,0,3,1,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Clerc",41,1,0,2,5,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(43,2,0,4,1,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Clerc",42,3,0,3,1,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(44,1,0,2,1,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Clerc",43,2,0,4,1,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(45,3,0,3,4,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Clerc",44,1,0,2,1,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(46,2,0,4,3,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Clerc",45,3,0,3,4,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(47,1,0,2,4,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Clerc",46,2,0,4,3,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(48,3,0,5,1,0,2);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Clerc",47,1,0,2,4,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(49,3,0,3,1,0,3);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Clerc",48,3,0,5,1,0,2);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(50,2,0,2,5,0,3);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Shaman",49,3,0,3,1,0,3);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(51,1,0,4,5,0,3);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Anarchiste",50,2,0,2,5,0,3);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(52,3,0,3,5,0,1);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Paladin",51,1,0,4,5,0,3);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(53,2,0,4,1,0,1);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Ascete",52,3,0,3,5,0,1);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(54,1,0,2,4,0,1);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Devin",53,2,0,4,1,0,1);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(55,3,0,3,4,0,3);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Exorciste",54,1,0,2,4,0,1);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(56,2,0,2,3,0,3);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Sorcier",55,3,0,3,4,0,3);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(57,1,0,4,5,0,3);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Tyran",56,2,0,2,3,0,3);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(58,1,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteGuide = new Guide("Messie",57,1,0,4,5,0,3);
+		collectionCarte.add(carteGuide);
 		
-		carte = new Carte(59,3,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Colere Divine",58,1,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(60,1,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Colere Divinie",59,3,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(61,1,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Stase",60,1,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(62,3,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Ordre Celeste",61,1,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(63,3,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Fourberie",62,3,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(64,2,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Diversion",63,3,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(65,2,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Concentration",64,2,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(66,2,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Trou Noir",65,2,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(67,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Phoenix",66,2,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(68,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Influence Jour",67,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(69,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Influence Nuit",68,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(70,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Influence Neant",69,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte= new Carte(71,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Influence Nulle",70,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(72,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx= new DeusEx("Influence Nulle",71,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(73,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Transe",72,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(74,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Miroir",73,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(75,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Bouleversement",74,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(76,1,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteDeusEx = new DeusEx("Inquisition",75,0,0,0,0,0,0);
+		collectionCarte.add(carteDeusEx);
 		
-		carte = new Carte(77,3,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteApocalypse = new Apocalypse("Apocalypse",76,1,0,0,0,0,0);
+		collectionCarte.add(carteApocalypse);
 		
-		carte = new Carte(78,2,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteApocalypse = new Apocalypse("Apocalypse",77,3,0,0,0,0,0);
+		collectionCarte.add(carteApocalypse);
 		
-		carte = new Carte(79,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteApocalypse = new Apocalypse("Apocalypse",78,2,0,0,0,0,0);
+		collectionCarte.add(carteApocalypse);
 		
-		carte = new Carte(80,0,0,0,0,0,0);
-		collectionCarte.add(carte);
+		carteApocalypse = new Apocalypse("Apocalypse",79,0,0,0,0,0,0);
+		collectionCarte.add(carteApocalypse);
+		
+		carteApocalypse = new Apocalypse("Apocalypse",80,0,0,0,0,0,0);
+		collectionCarte.add(carteApocalypse);
 		
-		carte = new Carte(81,1,1,5,4,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite ("Brenvalen",81,1,1,5,4,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(82,1,1,5,3,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Drinded",82,1,1,5,3,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(83,1,2,3,4,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Yarstur",83,1,2,3,4,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(84,3,1,4,2,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Killinstred",84,3,1,4,2,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(85,3,1,4,2,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Llenvella",85,3,1,4,2,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(86,3,1,4,3,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Pui-Tara",86,3,1,4,3,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(87,4,5,4,3,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Gnvenghelen",87,4,5,4,3,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(88,4,5,4,2,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Shingva",88,4,5,4,2,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(89,5,5,3,2,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Gorpa",89,5,5,3,2,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
-		carte = new Carte(90,5,1,5,2,0,0);
-		collectionCarteDivinite.add(carte);
+		carteDivinite = new Divinite("Romtec",90,5,1,5,2,0,0);
+		collectionCarteDivinite.add(carteDivinite);
 		
 
 		nombre = collectionCarte.size();
 		nombre2 = collectionCarteDivinite.size();
 		
-		//System.out.println("il y a" +nombre+ "cartes d'actions et "+nombre2+ "cartes Divinités");
+		//System.out.println("il y a" +nnnombre+ "cartes d'actions et "+nombre2+ "cartes Divinités");
 		/*
 
 		
