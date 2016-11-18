@@ -1,11 +1,14 @@
 package main;
 
 public class Carte extends Joueur{
-	private int identifiantCarte;
-	private int origineCarte;
-	private int natureCarte1, natureCarte2, natureCarte3;
-	private int croyantPosable , croyantRecuperable;
-	private String nom;
+	protected int identifiantCarte;
+	protected int origineCarte;
+	protected int natureCarte1, natureCarte2, natureCarte3;
+	protected int croyantPosable , croyantRecuperable;
+	protected String nom;
+	protected boolean carteProtege = false; // Empêche la carte d'être détruire
+	protected boolean CapaciteSpe = true; // Autorise ou pas la carte à avoir une capacité spéciale
+
 	
 	// 0:aucun, 1:nature , 2: chaos , 3: symboles , 4: mystique, 5: humain
 	// 0: aucune, 1: jour , 2: néant, 3: nuit 4: aube 5: crépuscule 
@@ -20,6 +23,7 @@ public class Carte extends Joueur{
 		croyantPosable=0;
 		croyantRecuperable=0;
 		nom="";
+		CapaciteSpe = true;
 		
 		
 	}
@@ -36,10 +40,18 @@ public class Carte extends Joueur{
 		this.croyantRecuperable=pcroyantRecuperable;
 	}
 	
+	
+	public String getInfosCarte(){
+		return "Nom: " +this.nom+ " \n Origine: "+this.origineCarte+ " \n Dogme1: " +this.natureCarte1+ "\n Dogme2: "+this.natureCarte2+"\n Dogme3: "+this.natureCarte3;
+	}
 	public String decrisToi(){
 		
 		return "\n Origine : " +this.origineCarte+ " \n Dogme 1 : " +this.natureCarte1+ "\n Dogme 2 :  " +this.natureCarte2+ "\n Dogme 3 : " +this.natureCarte3;
 	}
+	
+	public void utiliserEffet(){
+	}
+	
 	
 	//Creation d'un getter pour récuperer l'identifiant
 	public int getIdentifiantCarte() {
@@ -75,6 +87,10 @@ public class Carte extends Joueur{
 	
 	public int getOrigineCarte(){
 		return origineCarte;
+	}
+	
+	public String getNomCarte(){
+		return nom;
 	}
 	
 	public void setOrigineCarte (int id){

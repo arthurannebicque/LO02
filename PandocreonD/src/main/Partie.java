@@ -1,6 +1,7 @@
 package main;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 
 
@@ -17,6 +18,18 @@ public class Partie{
 	private ArrayList<Carte> collectionCarte;
 	private ArrayList<Carte> collectionCarteDivinite;
 	private ArrayList<Joueur> listeJoueur;
+	
+	private Scanner sc;
+	
+	boolean sacrifierCarte = false; // Oblige à sacrifier une carte
+	boolean sacrifierGuide = false; // Oblige à sacrifier un guide
+	
+	boolean poserApocalypse = false; // Oblige à poser une carte apocalypse
+	
+	boolean stopSacrificeGuide = false; //Empêche de sacrifier une carte Guide
+	boolean stopApocalypse = false; // Empêche de poser une carte apocalypse
+	
+	boolean PtsAction = false; //Autorise ou pas les points d'actions
 	
 	
 	
@@ -91,7 +104,7 @@ public class Partie{
 		collectionCarte.add(carteCroyant);
 		
 		carteCroyant = new Croyant("Demons",15,3,2,5,4,2,0);
-		collectionCarte.add(carte);
+		collectionCarte.add(carteCroyant);
 		
 		carteCroyant = new Croyant("Demons",16,3,2,4,3,2,0);
 		collectionCarte.add(carteCroyant);
@@ -106,7 +119,7 @@ public class Partie{
 		collectionCarte.add(carteCroyant);
 		
 		carteCroyant = new Croyant("Alchimistes",20,3,2,1,4,2,0);
-		collectionCarte.add(carte);
+		collectionCarte.add(carteCroyant);
 		
 		carteCroyant = new Croyant("Alchimistes",21,3,2,1,3,2,0);
 		collectionCarte.add(carteCroyant);
@@ -118,7 +131,7 @@ public class Partie{
 		collectionCarte.add(carteCroyant);
 		
 		carteCroyant = new Croyant("Lycanthropes",24,3,2,1,5,4,0);
-		collectionCarte.add(carte);
+		collectionCarte.add(carteCroyant);
 		
 		carteCroyant = new Croyant("Pillards",25,3,3,1,4,4,0);
 		collectionCarte.add(carteCroyant);
@@ -331,6 +344,62 @@ public class Partie{
 		*/
 	}
 
+	
+	public void demarrerPartie(){
+		
+		System.out.println(" Pandocreon Divinae \n Combien de joueur ?");
+		sc = new Scanner(System.in);
+		String reponse = sc.nextLine();
+		int rep = Integer.parseInt(reponse); // On transforme la réponse en int
+		System.out.println("Initialisation de la partie\n\n");
+		
+		this.creerDeck();
+		this.melangerDeck();
+		this.creerListeJoueur(rep);
+		this.distribuerDivinite();
+		this.distribuerCarte();
+		System.out.println("Vous êtes le joueur " +this.getListeJoueur().get(0).getString());
+		System.out.println("Vous avez eu la carte divinité: \n" +this.getListeJoueur().get(0).getInfosDivinite());
+		System.out.println("Vous avez reçu les cartes:\n ");
+		
+		for (int i=0; i<7 ; i++){
+		System.out.printf("\n "+(i)+ " - " +this.getListeJoueur().get(0).getMain().get(i).getIdentifiantCarte()+ "\n");
+		System.out.println(this.getListeJoueur().get(0).getMain().get(i).getInfosCarte());
+		}
+		
+		// Rajouter une boucle pour chaque joueur
+		System.out.println("\n Combien de carte voulez vous defausser ? (entre 1 et 7 dans l'ordre)");
+		int nbre = sc.nextInt();
+		int i=0;
+		int c = 0, temp=7;
+		while (i < nbre){
+			System.out.println("Quelle carte ?");
+			int crte = sc.nextInt();
+				if (crte > temp){
+					c++;
+					this.getListeJoueur().get(0).defausserCarte(crte-c, this.getCollectionCarte());	
+					temp = crte;
+					}
+				else{
+					this.getListeJoueur().get(0).defausserCarte(crte-c, this.getCollectionCarte());
+					temp = crte;
+					}
+			this.distribuerCarte();
+			i++;
+		}
+		
+		System.out.println("Vous avez les cartes:\n ");
+	
+		for (int j=0; j<this.getListeJoueur().get(0).main.size() ; j++){
+			System.out.printf("\n "+(j)+ " - " +this.getListeJoueur().get(0).getMain().get(j).getIdentifiantCarte()+ " | ");
+			System.out.println("\n" +this.getListeJoueur().get(0).getMain().get(j).getInfosCarte());
+		}
+		
+		// On lance le dé
+		this.getListeJoueur().get(0).lancerDe(this.getListeJoueur());
+		
+	}
+	
 	// Méthode pour mélanger les cartes action et divinités
 	public void melangerDeck(){
 	Collections.shuffle(collectionCarte); // On mélange la liste des cartes action du deck

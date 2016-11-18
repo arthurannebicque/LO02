@@ -1,6 +1,6 @@
 package main;
 
-public class Apocalypse extends Divinite {
+public class Apocalypse extends Carte{
 	
 	public Apocalypse(){
 		super();
