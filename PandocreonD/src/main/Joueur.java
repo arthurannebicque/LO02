@@ -1,17 +1,17 @@
 package main;
 
 import java.util.ArrayList;
-import java.lang.*;
 
-public class Joueur {
+public class Joueur implements Strategie {
 	protected String nom;
-	protected int nombreCroyant, nombreGuide;
+	protected int nombreCroyantTotal, nombreGuide;
 	// On crée un attribut pour les points d'action 1: jour , 2: nuit, 3: néant
 	protected int[] nombrePointAction = new int [4];
 	protected ArrayList<Carte> main; 
 	protected ArrayList<Carte> guidePossede;
 	protected ArrayList<Carte> croyantPossede;
 	protected Carte Divinite;
+	protected double resultatDes;
 	
 	protected boolean stopApocalypse = false; // Empêche de poser une carte apocalypse
 	boolean stopSacrificeGuide = false; //Empêche de sacrifier une carte Guide
@@ -19,7 +19,7 @@ public class Joueur {
 	// Constructeur par défaut
 	public Joueur(){
 		nom = "Joueur";
-		nombreCroyant = 0;
+		nombreCroyantTotal = 0; // Nombre de croyant total que possède un joueur
 		nombreGuide = 0;
 		nombrePointAction[1]=0;
 		nombrePointAction[2]=0;
@@ -28,9 +28,9 @@ public class Joueur {
 		guidePossede = new ArrayList<Carte>();
 		croyantPossede = new ArrayList<Carte>();
 		
+		
 	}
 
-// Methode poser Carte
 // Methode defausser Carte
 	public void defausserCarte( int indice , ArrayList<Carte> deck){ // On appelera avec joueur.defausser, et en argument on mettra p.getCollection...
 		deck.add(this.getMain().get(indice)); //Rajoute la carte selectionnée à la fin du deck 
@@ -42,18 +42,21 @@ public class Joueur {
 // Methode lancer Dé
 	
 	public void lancerDe( ArrayList <Joueur> listejoueur){ // On rentre un p.listejoueur
-		double resultatDe = Math.random();
-		int num = listejoueur.size();
-		for (int i=0; i<num; i++){
-			if ( resultatDe >= 0 && resultatDe <(1/3)){ // Dans ce cas, on est en face Jour
+		double resultatDe = Math.round(Math.random()*3);
+		resultatDes = resultatDe;
+		for (int i=0; i<listejoueur.size(); i++){
+			if ( resultatDe >= 0 && resultatDe <1){ // Dans ce cas, on est en face Jour
+				
 					if ( listejoueur.get(i).getDivinite().getOrigineCarte() == 1 ){ // Si le joueur a une Divinité d'origine jour
 						listejoueur.get(i).setPointAction(1,2); //On donne 2 pts jour
+					
 					}
 					if ( listejoueur.get(i).getDivinite().getOrigineCarte() == 4){
 						listejoueur.get(i).setPointAction(1,1);
 					}	
 				}	
-			else if ( resultatDe <=(1/3) && resultatDe <(2/3)){ // Dans ce cas, on est en face Nuit
+			else if ( resultatDe <=1 && resultatDe <2){ // Dans ce cas, on est en face Nuit
+				
 					if (listejoueur.get(i).getDivinite().getOrigineCarte() == 3){
 						listejoueur.get(i).setPointAction(2,2);
 					}
@@ -62,58 +65,111 @@ public class Joueur {
 					}
 			}
 			else {
+				
+				if ( listejoueur.get(i).getDivinite().getOrigineCarte()==4 || listejoueur.get(i).getDivinite().getOrigineCarte()==5){
 				listejoueur.get(i).setPointAction(3,1);
-			}
-			}
-	}
-		
-		
-	// Methode poser carte à terminer avec Deus Ex et Apocalypse
-	public void poserCarte( int id , Plateau table){ // On entre joueur.main. et l'id de la main qu'on veut
-		if ((this.main.get(id).identifiantCarte >=1) && (this.main.get(id).identifiantCarte <= 37)){// Si la carte selectionnée est un croyant , on le met sur le plateau
-			table.getCartePlateau().add(this.main.get(id)); // On rajoute la carte croyant sur la table
-			// On ajoute le nombre de croyant dispo à une variable qui les compte dans plateau
-			this.main.remove(id); // On enlève la carte de nos mains
-		}
-		else if ((this.main.get(id).identifiantCarte >=38) && (this.main.get(id).identifiantCarte <=57 )){ // Si la carte selectionnée est un guide, on le met dans la liste du joueur
-			this.guidePossede.add(this.main.get(id)); // On ajoute la carte de guide qu'on possède
-		// Le guide va rechercher sur le tableau les cartes croyantes qu'il peut recup
-
-			int i=0;
-			while (i<this.guidePossede.get(this.guidePossede.size()-1).croyantPossede.size() && i<table.getCartePlateau().size()){ //On répète l'opération tant qu'on a pas le nombre max de croyant ou qu'on est pas à la fin de la liste
-				if ((table.getCartePlateau().get(i).natureCarte1 == this.main.get(id).natureCarte2 ) || (table.getCartePlateau().get(i).natureCarte1 == this.main.get(id).natureCarte3)){ //On fait une recherche de cartes croyants qui sont dogme 1 ou dogme 2
-					// Si le dogme 1 de la carte est égale à un des dogmes du guide
-					this.guidePossede.get(this.guidePossede.size()-1).croyantPossede.add(table.getCartePlateau().get(i));//Si on en trouve on ajoute la carte au guide
-					this.guidePossede.get(this.guidePossede.size()-1).nombreCroyant = this.guidePossede.get(this.guidePossede.size()-1).nombreCroyant + table.getCartePlateau().get(i).croyantPosable; //On ajoute le nombre de croyant de lié au guide
-					table.getCartePlateau().remove(i); //On enlève la carte de la liste de la table
-					i++;
-					}
-				else if ((table.getCartePlateau().get(i).natureCarte2 == this.main.get(id).natureCarte2 ) || (table.getCartePlateau().get(i).natureCarte2 == this.main.get(id).natureCarte3)){
-					// Si le dogme 2 de la carte est égale à un des dogmes du guide
-					this.guidePossede.get(this.guidePossede.size()-1).croyantPossede.add(table.getCartePlateau().get(i));
-					this.guidePossede.get(this.guidePossede.size()-1).nombreCroyant = this.guidePossede.get(this.guidePossede.size()-1).nombreCroyant + table.getCartePlateau().get(i).croyantPosable;
-					table.getCartePlateau().remove(i);
-					i++;
-					}
-				else if ((table.getCartePlateau().get(i).natureCarte3 == this.main.get(id).natureCarte2 ) || (table.getCartePlateau().get(i).natureCarte3 == this.main.get(id).natureCarte3)){
-					// Si le dogme 3 de la carte est égale à un des dogmes du guide
-					this.guidePossede.get(this.guidePossede.size()-1).croyantPossede.add(table.getCartePlateau().get(i));
-					this.guidePossede.get(this.guidePossede.size()-1).nombreCroyant = this.guidePossede.get(this.guidePossede.size()-1).nombreCroyant + table.getCartePlateau().get(i).croyantPosable;
-					table.getCartePlateau().remove(i);
-					i++;
 				}
 			}
+			
+			listejoueur.get(i).resultatDes = resultatDe;
+			}
+	}
+		
+	public void poserCarte( int id, ArrayList<Carte> table , ArrayList<Carte> collection ){
+	{//l'id de la main correspondant à la carte qu'on veut poser , partie on rentre collectionCarte
+		if (( this.main.get(id).identifiantCarte >=1) && (this.main.get(id).identifiantCarte <=37)){// Si la carte selectionnée est un croyant , on le met sur le plateau
+			table.add(this.main.get(id)); // On rajoute la carte croyant sur la table
+			// On peut ajouter le nombre de croyant dispo à une variable qui les compte sur le plateau
+			this.main.remove(id);// On enlève la carte de nos mains
+			System.out.println("On a enlevé la carte");
+			/////////// On enlève les points d'actions correspondants 
 		}
-		else { // Si cest une carte Deus Ex 
-			// Si c'est une carte apocalypse
+		else if (( this.main.get(id).identifiantCarte >=38) && (this.main.get(id).identifiantCarte <=57)){// Si la carte selectionnée est un guide, on le met dans la liste du joueur
+			this.guidePossede.add(this.main.get(id));// On ajoute la carte de guide qu'on possède
+			// Le guide va rechercher sur le tableau les cartes croyantes qu'il peut recup
+			int i =0;
+			while ((i < (((Guide)this.guidePossede.get(this.guidePossede.size()-1)).getCroyantRecuperable())) && (i<table.size())){
+				if ((table.get(i).natureCarte1 == this.main.get(id).natureCarte2) || (table.get(i).natureCarte1 == this.main.get(id).natureCarte3)){//On fait une recherche de cartes croyants qui sont dogme 1 ou dogme 2
+				// Si le dogme 1 de la carte est égale à un des dogmes du guide
+					this.guidePossede.get(this.guidePossede.size()-1).croyantPossede.add(table.get(i)); //Si on en trouve on ajoute la carte au guide
+					int nbreCroyant;
+					nbreCroyant = ((Guide)this.guidePossede.get(this.guidePossede.size()-1)).getNombreCroyant();//On ajoute le nombre de croyant de lié au guide
+					nbreCroyant = nbreCroyant + ((Croyant)table.get(i)).getCroyantDisponible();
+					((Guide)this.guidePossede.get(this.guidePossede.size()-1)).setNombreCroyant(nbreCroyant);
+					table.remove(i);
+					i++;
+					
+					
+					//((Guide)this.guidePossede.get(this.guidePossede.size()-1)).getNombreCroyant() = ((Guide)this.guidePossede.get(this.guidePossede.size()-1)).getNombreCroyant() + ((Croyant)table.getCartePlateau().get(i)).getCroyantDisponible();
+					//((Guide)this.guidePossede.get(1)).getNombreCroyant() = 1;
+				}
+				else if ((table.get(i).natureCarte2 == this.main.get(id).natureCarte2) || (table.get(i).natureCarte2 == this.main.get(id).natureCarte3)){
+					// Si le dogme 2 de la carte est égale à un des dogmes du guide
+					this.guidePossede.get(this.guidePossede.size()-1).croyantPossede.add(table.get(i)); //Si on en trouve on ajoute la carte au guide
+					int nbreCroyant;
+					nbreCroyant = ((Guide)this.guidePossede.get(this.guidePossede.size()-1)).getNombreCroyant();//On ajoute le nombre de croyant de lié au guide
+					nbreCroyant = nbreCroyant + ((Croyant)table.get(i)).getCroyantDisponible();
+					((Guide)this.guidePossede.get(this.guidePossede.size()-1)).setNombreCroyant(nbreCroyant);
+					table.remove(i);
+					i++;
+				}
+				else if ((table.get(i).natureCarte3 == this.main.get(id).natureCarte2) || (table.get(i).natureCarte3 == this.main.get(id).natureCarte3)){
+					// Si le dogme 3 de la carte est égale à un des dogmes du guide
+					this.guidePossede.get(this.guidePossede.size()-1).croyantPossede.add(table.get(i)); //Si on en trouve on ajoute la carte au guide
+					int nbreCroyant;
+					nbreCroyant = ((Guide)this.guidePossede.get(this.guidePossede.size()-1)).getNombreCroyant();//On ajoute le nombre de croyant de lié au guide
+					nbreCroyant = nbreCroyant + ((Croyant)table.get(i)).getCroyantDisponible();
+					((Guide)this.guidePossede.get(this.guidePossede.size()-1)).setNombreCroyant(nbreCroyant);
+					table.remove(i);
+					i++;
+				}
+				else{
+					System.out.println("Il n'y a pas de croyants compatibles");
+					// Dans ce cas, il n'y a pas de cartes croyants compatibles
+				}
+					//On répète l'opération tant qu'on a pas le nombre max de croyant ou qu'on est pas à la fin de la liste
+			}
+		}
+		else if ((this.main.get(id).identifiantCarte >=58) && (this.main.get(id).identifiantCarte<=75)){ // Si la carte selectionnée est une Deus Ex
+				/*	On utilise l'effet de la carte, selon son id
+				 *  On retire la carte de la main
+				 *  On place la carte au fond de la pile de carte
+				 */
+			//this.main.get(id).utiliserEffet(id); On utilise l'effet de la carte
+			this.defausserCarte(id, collection); // On defausse la carte
+		}
+		else if ((this.main.get(id).identifiantCarte >=76) && (this.main.get(id).identifiantCarte<=80)){ // Si on veut poser une carte Apocalypse
+			/* On utilise l'effet de la carte selon son id
+			 * S'il ne s'est rien passé, on défausse la carte
+			 * 
+			 */
+		//this.main.get(id).utiliserEffet(); On utilise l'effet
+		// Si l'effet ne nous a pas fait stopper le jeu, la carte sera défausser dans son effet ou ici ( a voir)
+		}
+		else{
+			// On ne veut pas poser de carte, on exit la méthode
 		}
 	}
+	}
 	
+	public void sacrifierCarte(int id, Partie p){
+		this.main.get(id).utiliserEffet();
+		this.defausserCarte(id, p.getcollectionCarte());
+	}
 	// Creation d'un setter pour nommer le Joueur (Joueur 1 , 2 , 3 ...)
+	
+	public void utiliserEffetDivinite(){
+		this.getDivinite().utiliserEffet();
+	}
+	
+	
 	public String setNom(int i){
 		return nom = nom + String.valueOf(i);
 	}
 	
+	public String getNom(){
+		return nom;
+	}
 // Création d'un setter pour donner une Divinite
 	public void  setDivinite( Carte pDivinite){
 		Divinite = pDivinite;
@@ -121,11 +177,34 @@ public class Joueur {
 	}
 	
 	public void setPointAction( int indice , int valeur){
-		this.nombrePointAction[indice] = nombrePointAction[indice]+valeur;
+		this.nombrePointAction[indice] = this.nombrePointAction[indice] +valeur;
 	}
 	
-	public Carte getDivinite(){ // Type à revérifier
+	public int getNombreCroyantTotal(){
+		int nombreCroyantTotal =0;
+		for (int i=0; i< this.guidePossede.size();i++){
+			for (int j=0; j<this.guidePossede.get(i).croyantPossede.size();j++){
+				nombreCroyantTotal = nombreCroyantTotal + ((Croyant)this.guidePossede.get(i).croyantPossede.get(j)).croyantDisponible;
+			}
+		}
+		return nombreCroyantTotal;
+	}
+	
+	public int getNombreGuide(){
+		int nombreGuide = this.guidePossede.size();
+		return nombreGuide;
+	}
+	
+	public Carte getDivinite(){
 		return Divinite;
+	}
+	
+	public String getPointsAction(){
+		return "\n Vous avez "+this.nombrePointAction[1]+ " points Jour (1) \n Vous avez "+this.nombrePointAction[2]+ " points Nuit (2)\n Vous avez "+this.nombrePointAction[3]+ " points Néant (3)";
+	}
+	
+	public Double getResultatDe(){
+		return resultatDes;
 	}
 	
 	public ArrayList<Carte> getGuidePossede(){

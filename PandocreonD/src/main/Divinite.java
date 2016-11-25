@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 
 public class Divinite extends Carte{
 
@@ -8,12 +7,11 @@ public class Divinite extends Carte{
 		super();
 		
 	}
-
-	public Divinite(String string, int i, int j, int k, int l, int m, int n, int o) {
-		super( string, i , j ,k, l,m,n,o);
-		// TODO Auto-generated constructor stub
-	}
 	
+	public Divinite(String string, int i, int j, int k, int l, int m) {
+		super ( string , i , j , k, l,m);
+	}
+
 	// On code l'effet utiliserEffet() qui est un polymorphe
 	public void utiliserEffet( Carte carteSelectionnee, Joueur joueurChoisi){ // On donne p.joueur.divinite 
 		int idEffet = carteSelectionnee.identifiantCarte; // on attribut à idEffet l'id de la carte, selon sa valeur, l'effet sera different

@@ -4,7 +4,6 @@ public class Carte extends Joueur{
 	protected int identifiantCarte;
 	protected int origineCarte;
 	protected int natureCarte1, natureCarte2, natureCarte3;
-	protected int croyantPosable , croyantRecuperable;
 	protected String nom;
 	protected boolean carteProtege = false; // Empêche la carte d'être détruire
 	protected boolean CapaciteSpe = true; // Autorise ou pas la carte à avoir une capacité spéciale
@@ -20,8 +19,6 @@ public class Carte extends Joueur{
 		natureCarte1=0;
 		natureCarte2=0;
 		natureCarte3=0;
-		croyantPosable=0;
-		croyantRecuperable=0;
 		nom="";
 		CapaciteSpe = true;
 		
@@ -29,24 +26,18 @@ public class Carte extends Joueur{
 	}
 
 	// Constructeur de la classe Carte
-	public Carte(String pnom, int pid, int porigine, int pdogme1 , int pdogme2, int pdogme3, int pcroyantPosable, int pcroyantRecuperable){
+	public Carte(String pnom, int pid, int porigine, int pdogme1 , int pdogme2, int pdogme3){
 		this.nom = pnom;
 		this.identifiantCarte = pid;
 		this.origineCarte = porigine;
 		this.natureCarte1 = pdogme1;
 		this.natureCarte2 = pdogme2;
 		this.natureCarte3 = pdogme3;
-		this.croyantPosable=pcroyantPosable;
-		this.croyantRecuperable=pcroyantRecuperable;
 	}
 	
 	
 	public String getInfosCarte(){
 		return "Nom: " +this.nom+ " \n Origine: "+this.origineCarte+ " \n Dogme1: " +this.natureCarte1+ "\n Dogme2: "+this.natureCarte2+"\n Dogme3: "+this.natureCarte3;
-	}
-	public String decrisToi(){
-		
-		return "\n Origine : " +this.origineCarte+ " \n Dogme 1 : " +this.natureCarte1+ "\n Dogme 2 :  " +this.natureCarte2+ "\n Dogme 3 : " +this.natureCarte3;
 	}
 	
 	public void utiliserEffet(){
@@ -96,6 +87,7 @@ public class Carte extends Joueur{
 	public void setOrigineCarte (int id){
 			origineCarte=id;
 	}
+
 	
 	
 }

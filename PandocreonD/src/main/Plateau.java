@@ -8,6 +8,7 @@ public class Plateau {
 	private ArrayList<Carte> cartePlateau;
 	
 	public Plateau(){
+		cartePlateau = new ArrayList<Carte>();
 		
 	}
 	
