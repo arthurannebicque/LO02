@@ -1,5 +1,6 @@
 package main;
 
+
 public class Croyant extends Carte {
 
 	
@@ -16,6 +17,10 @@ public class Croyant extends Carte {
 		super( string, i , j , k , l , m );
 		croyantDisponible =n;
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void utiliserEffet(){				
+		
 	}
 	
 	public int getCroyantDisponible(){

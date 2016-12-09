@@ -5,14 +5,14 @@ public class Carte extends Joueur{
 	protected int origineCarte;
 	protected int natureCarte1, natureCarte2, natureCarte3;
 	protected String nom;
-	protected boolean carteProtege = false; // Empêche la carte d'être détruire
-	protected boolean CapaciteSpe = true; // Autorise ou pas la carte à avoir une capacité spéciale
+	protected boolean carteProtege = false; // Empï¿½che la carte d'ï¿½tre dï¿½truire
+	protected boolean CapaciteSpe = true; // Autorise ou pas la carte ï¿½ avoir une capacitï¿½ spï¿½ciale
 
 	
 	// 0:aucun, 1:nature , 2: chaos , 3: symboles , 4: mystique, 5: humain
-	// 0: aucune, 1: jour , 2: néant, 3: nuit 4: aube 5: crépuscule 
+	// 0: aucune, 1: jour , 2: nï¿½ant, 3: nuit 4: aube 5: crï¿½puscule 
 	
-	// Constructeur par défaut
+	// Constructeur par dï¿½faut
 	public Carte(){
 		identifiantCarte=0;
 		origineCarte=0;
@@ -40,16 +40,18 @@ public class Carte extends Joueur{
 		return "Nom: " +this.nom+ " \n Origine: "+this.origineCarte+ " \n Dogme1: " +this.natureCarte1+ "\n Dogme2: "+this.natureCarte2+"\n Dogme3: "+this.natureCarte3;
 	}
 	
-	public void utiliserEffet(){
+	public void utiliserEffet(Carte carte){
+		
+		
 	}
 	
 	
-	//Creation d'un getter pour récuperer l'identifiant
+	//Creation d'un getter pour rï¿½cuperer l'identifiant
 	public int getIdentifiantCarte() {
 		return identifiantCarte;
 	}
 
-	// Création d'un setter pour changer l'identifiant
+	// Crï¿½ation d'un setter pour changer l'identifiant
 	public void setIdentifiantCarte(int id){
 			identifiantCarte = id;
 	}
@@ -63,7 +65,7 @@ public class Carte extends Joueur{
 	public int getNatureCarte3(){ 
 		return natureCarte3;
 	}
-	// Création d'un setter pour changer les infos de la carte
+	// Crï¿½ation d'un setter pour changer les infos de la carte
 	public void setNatureCarte1( int valeur){
 			natureCarte1=valeur;
 	}

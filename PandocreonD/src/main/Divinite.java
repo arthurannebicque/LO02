@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 
 public class Divinite extends Carte{
 
@@ -12,25 +13,48 @@ public class Divinite extends Carte{
 		super ( string , i , j , k, l,m);
 	}
 
-	// On code l'effet utiliserEffet() qui est un polymorphe
-	public void utiliserEffet( Carte carteSelectionnee, Joueur joueurChoisi){ // On donne p.joueur.divinite 
-		int idEffet = carteSelectionnee.identifiantCarte; // on attribut à idEffet l'id de la carte, selon sa valeur, l'effet sera different
-		if ( idEffet == 81 ){ // Si on a la divinité 81 
-			// On choisi la personne qu'on cible , on recupère son id ( joueur 0 1 2 3...)
-			joueurChoisi.stopApocalypse = true; // On l'empêche d'utiliser une carte apocalypse
-		}
-		else if ( idEffet == 82){ // Si on a la divinité 82
-			// On choisi la personne qu'on cible, on recupère son id
-			joueurChoisi.stopSacrificeGuide = true; // On l'empêche de sacrifier un guide
-		}
-		else if (idEffet == 83){
-			// Si une croyante d'origine nuit est sur le plateau, on l'enlève et on le met dans la pioche
 
-		}
+		
+	public void utiliserEffet(Carte carte, Joueur utilisateur, Joueur cible, ArrayList<Joueur> listeJoueur){
+		int id = carte.identifiantCarte;
+		switch (id) {
+			case 81:
+				//Empeche le joueur de jouer une carte apocalypse
+				cible.stopApocalypse = true;
+				break;
+			case 82:
+				//Empeche le sacrifice d'un guide spirituel de n'importe quelle joueur
+				cible.stopSacrificeGuide = true;
+				break;
+			case 83:
+				// Si une croyante d'origine nuit est sur le plateau, on l'enleve et on le met dans la pioche
+				break;
+			case 84:
+				//Force un joueur Ã  poser une carte apocalypse
+				break;
+			case 85:
+				//Force un joueur Ã  poser une carte apocalypse
+				break;
+			case 86:
+				//Detruit toutes les cartes de croyants d'origine Jour au centre de la table
+				break;
+			case 87:
+				//Donne autant de points d'action d'origine NÃ©ant que le nombre de guide spirituel que le joueur possede
+				break;
+			case 88: 
+				//Force le sacrifice d'un guide spirituel avec dogme symboles ou nature
+				break;
+			case 89: 
+				//RÃ©cupÃ¨re les points d'actions d'un autre joueur en plus des siens, L'autre joueur ne reÃ§oit aucun point d'action ce tour ci
+				break;
+			case 90:
+				//Empeche un joueur de crÃ©e un guide spirituel
+				break;
+
 		
 		
 		
+			}
 	}
-
 }
 

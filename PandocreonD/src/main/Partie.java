@@ -23,22 +23,22 @@ public class Partie{
 	private Scanner sc;
 	private boolean partieTermine = false;
 	
-	boolean sacrifierCarte = false; // Oblige à sacrifier une carte
-	boolean sacrifierGuide = false; // Oblige à sacrifier un guide
+	boolean sacrifierCarte = false; // Oblige ï¿½ sacrifier une carte
+	boolean sacrifierGuide = false; // Oblige ï¿½ sacrifier un guide
 	
-	boolean poserApocalypse = false; // Oblige à poser une carte apocalypse
+	boolean poserApocalypse = false; // Oblige ï¿½ poser une carte apocalypse
 	
-	boolean stopSacrificeGuide = false; //Empêche de sacrifier une carte Guide
-	boolean stopApocalypse = false; // Empêche de poser une carte apocalypse
+	boolean stopSacrificeGuide = false; //Empï¿½che de sacrifier une carte Guide
+	boolean stopApocalypse = false; // Empï¿½che de poser une carte apocalypse
 	
 	boolean PtsAction = false; //Autorise ou pas les points d'actions
-	boolean effetDivinite = false; // Dit si un effet divinité a déjà été utilisé ou pas
+	boolean effetDivinite = false; // Dit si un effet divinitï¿½ a dï¿½jï¿½ ï¿½tï¿½ utilisï¿½ ou pas
 	
 	protected boolean choixJoueur = false;
 	
 	
 	
-	//Constructeur par défaut
+	//Constructeur par dï¿½faut
 	public Partie(){
 		
 	}
@@ -47,14 +47,14 @@ public class Partie{
 		return collectionCarte;
 	}
 	
-	// Méthode pour remplir le deck des cartes action et divinités
+	// Mï¿½thode pour remplir le deck des cartes action et divinitï¿½s
 	public void creerDeck(){
 		
-		// On crée une liste de carte, qui sera la pioche des cartes actions
+		// On crï¿½e une liste de carte, qui sera la pioche des cartes actions
 		collectionCarte = new ArrayList<Carte>();
-		// On crée une liste de carte, qui sera la pioche des cartes divinités
+		// On crï¿½e une liste de carte, qui sera la pioche des cartes divinitï¿½s
 		collectionCarteDivinite = new ArrayList<Carte>();
-		//System.out.println("La méthode a été lancée");
+		//System.out.println("La mï¿½thode a ï¿½tï¿½ lancï¿½e");
 		carteDivinite = new Divinite();
 		carteApocalypse = new Apocalypse();
 		carteDeusEx = new DeusEx();
@@ -341,7 +341,7 @@ public class Partie{
 		System.out.println(" Pandocreon Divinae \n Combien de joueur ?");
 		sc = new Scanner(System.in);
 		String reponse = sc.nextLine();
-		int rep = Integer.parseInt(reponse); // On transforme la réponse en int
+		int rep = Integer.parseInt(reponse); // On transforme la rï¿½ponse en int
 		System.out.println("Initialisation de la partie\n\n");
 		
 		
@@ -352,8 +352,8 @@ public class Partie{
 		cartePlateau = new ArrayList<Carte>();
 		
 				
-		System.out.println("Vous êtes le joueur " +this.listeJoueur.get(0).getString());
-		System.out.println("Vous avez eu la carte divinité: \n" +this.listeJoueur.get(0).getInfosDivinite());
+		System.out.println("Vous ï¿½tes le joueur " +this.listeJoueur.get(0).getString());
+		System.out.println("Vous avez eu la carte divinitï¿½: \n" +this.listeJoueur.get(0).getInfosDivinite());
 		int nbreTour=1;
 		
 		
@@ -403,18 +403,18 @@ public class Partie{
 			System.out.println("\n" +this.listeJoueur.get(0).main.get(j).getInfosCarte());
 		}
 		
-		// Le premier à jouer lance le dé
+		// Le premier ï¿½ jouer lance le dï¿½
 		this.tourJoueur.get(0).lancerDe(this.listeJoueur);
 		System.out.println("\n/// Tour : " +nbreTour+ " ///");
-		System.out.println("/// Infos: "+this.tourJoueur.get(0).getNom()+ " lance le dé ///\n");
+		System.out.println("/// Infos: "+this.tourJoueur.get(0).getNom()+ " lance le dï¿½ ///\n");
 		if (this.listeJoueur.get(0).resultatDes>=0 && this.listeJoueur.get(0).resultatDes<1){
-			System.out.println("\n Influence: Jour ! \n Les divinités d'origine Jour gagnent 2 points action  Jour (1)! \n Les divinités d'origine Aube gagnent 1 point d'action Jour (1)!");
+			System.out.println("\n Influence: Jour ! \n Les divinitï¿½s d'origine Jour gagnent 2 points action  Jour (1)! \n Les divinitï¿½s d'origine Aube gagnent 1 point d'action Jour (1)!");
 		}
 		else if (this.listeJoueur.get(0).resultatDes<=1 && this.listeJoueur.get(0).resultatDes<2){
-			System.out.println("\n Influence: Nuit ! \n Les divinités d'origine Nuit gagnent 2 points action Nuit (2) ! \n Les divinités d'origine Crépuscule gagnent 1 point d'action Nuit (2)  !");
+			System.out.println("\n Influence: Nuit ! \n Les divinitï¿½s d'origine Nuit gagnent 2 points action Nuit (2) ! \n Les divinitï¿½s d'origine Crï¿½puscule gagnent 1 point d'action Nuit (2)  !");
 		}
 		else{
-			System.out.println("\n Influence: Néant ! \n Les divinités d'origine Aube gagnent 1 point action Neant (3)! \n Les divinités d'origine Crépuscule gagnent 1 point d'action Néant");
+			System.out.println("\n Influence: Nï¿½ant ! \n Les divinitï¿½s d'origine Aube gagnent 1 point action Neant (3)! \n Les divinitï¿½s d'origine Crï¿½puscule gagnent 1 point d'action Nï¿½ant");
 		}
 		
 		System.out.println("/// Sur le plateau, il y a " +this.cartePlateau.size()+ " cartes croyants ///");
@@ -430,22 +430,22 @@ public class Partie{
 			if (this.tourJoueur.get(j)== this.listeJoueur.get(0)){
 				System.out.println("\n\n A votre tour !");
 				while ( choixJoueur == false){
-				System.out.println("\n Que voulez-vous faire ?\n - Jouer une carte (1)\n - Sacrifier une carte (2)\n - Utiliser effet divinité (3)\n - Passer mon tour (4)");
+				System.out.println("\n Que voulez-vous faire ?\n - Jouer une carte (1)\n - Sacrifier une carte (2)\n - Utiliser effet divinitï¿½ (3)\n - Passer mon tour (4)");
 				nbre = sc.nextInt();
 				
 				switch (nbre){
 				case 1:  // Si on choisi 1, on veut jouer une carte
-					if (sacrifierCarte==false && sacrifierGuide==false){ // On peut le faire si: on est pas obligé de sacrifier, ni de sacrifier un guide
+					if (sacrifierCarte==false && sacrifierGuide==false){ // On peut le faire si: on est pas obligï¿½ de sacrifier, ni de sacrifier un guide
 						System.out.println("Quelle carte voulez-vous jouer ?");
 						rep = sc.nextInt();
-						if ((this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()>=1 && this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()<=37) && poserApocalypse==false){ // Si on est pas obligé de poser une apocalypse, et on a 1 pts d'action d'origine que la carte
-							if (this.listeJoueur.get(0).nombrePointAction[this.listeJoueur.get(0).main.get(rep).origineCarte] !=0){ // Si on a des points correspondants à l'origine de la carte, on peut la jouer
+						if ((this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()>=1 && this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()<=37) && poserApocalypse==false){ // Si on est pas obligï¿½ de poser une apocalypse, et on a 1 pts d'action d'origine que la carte
+							if (this.listeJoueur.get(0).nombrePointAction[this.listeJoueur.get(0).main.get(rep).origineCarte] !=0){ // Si on a des points correspondants ï¿½ l'origine de la carte, on peut la jouer
 								this.listeJoueur.get(0).setPointAction(this.listeJoueur.get(0).main.get(rep).origineCarte,-1);
 								this.listeJoueur.get(0).poserCarte(rep, this.cartePlateau, this.getCollectionCarte());
 								choixJoueur = true;
 							
 							}
-							else if(this.listeJoueur.get(0).main.get(rep).origineCarte ==3){ // Si on a une carte d'origine Néant
+							else if(this.listeJoueur.get(0).main.get(rep).origineCarte ==3){ // Si on a une carte d'origine Nï¿½ant
 								if(this.listeJoueur.get(0).nombrePointAction[1]>=2){ // On regarde si on a assez de point d'action Jour
 									this.listeJoueur.get(0).setPointAction(1, -2); // Si c'est le cas, on en retire 2
 									this.listeJoueur.get(0).poserCarte(rep,this.cartePlateau, this.getCollectionCarte()); // On pose la carte
@@ -466,14 +466,14 @@ public class Partie{
 								// On a pas assez de points d'actions, on revient au choix
 							}
 						}
-						else if ((this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()>=38 && this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()<=57) && poserApocalypse==false){ // Si on est pas obligé de poser une apocalypse, et on a 1 pts d'action d'origine que la carte
-							if (this.listeJoueur.get(0).nombrePointAction[this.listeJoueur.get(0).main.get(rep).origineCarte] !=0){ // Si on a des points correspondants à l'origine de la carte, on peut la jouer
+						else if ((this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()>=38 && this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()<=57) && poserApocalypse==false){ // Si on est pas obligï¿½ de poser une apocalypse, et on a 1 pts d'action d'origine que la carte
+							if (this.listeJoueur.get(0).nombrePointAction[this.listeJoueur.get(0).main.get(rep).origineCarte] !=0){ // Si on a des points correspondants ï¿½ l'origine de la carte, on peut la jouer
 								this.listeJoueur.get(0).setPointAction(this.listeJoueur.get(0).main.get(rep).origineCarte,-1);
 								this.listeJoueur.get(0).poserCarte(rep, this.cartePlateau, this.getCollectionCarte());
 								choixJoueur = true;
 							
 							}
-							else if(this.listeJoueur.get(0).main.get(rep).origineCarte ==3){ // Si on a une carte d'origine Néant
+							else if(this.listeJoueur.get(0).main.get(rep).origineCarte ==3){ // Si on a une carte d'origine Nï¿½ant
 								if(this.listeJoueur.get(0).nombrePointAction[1]>=2){ // On regarde si on a assez de point d'action Jour
 									this.listeJoueur.get(0).setPointAction(1, -2); // Si c'est le cas, on en retire 2
 									this.listeJoueur.get(0).poserCarte(rep,this.cartePlateau, this.getCollectionCarte()); // On pose la carte
@@ -494,18 +494,18 @@ public class Partie{
 								// On a pas assez de points d'actions, on revient au choix
 							}
 						}
-						else if((this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()>=58 && this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()<=75) && poserApocalypse==false){ // Si c'est une carte Deus Ex et on est pas obligé de poser une apocalypse
+						else if((this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()>=58 && this.listeJoueur.get(0).main.get(rep).getIdentifiantCarte()<=75) && poserApocalypse==false){ // Si c'est une carte Deus Ex et on est pas obligï¿½ de poser une apocalypse
 							if (this.listeJoueur.get(0).main.get(rep).origineCarte ==0){
 								this.listeJoueur.get(0).poserCarte(rep, this.cartePlateau, this.getCollectionCarte());
 								choixJoueur = true;
 							}
-							else if (this.listeJoueur.get(0).nombrePointAction[this.listeJoueur.get(0).main.get(rep).origineCarte] !=0){ // Si on a des points correspondants à l'origine de la carte, on peut la jouer
+							else if (this.listeJoueur.get(0).nombrePointAction[this.listeJoueur.get(0).main.get(rep).origineCarte] !=0){ // Si on a des points correspondants ï¿½ l'origine de la carte, on peut la jouer
 								this.listeJoueur.get(0).setPointAction(this.listeJoueur.get(0).main.get(rep).origineCarte,-1);
 								this.listeJoueur.get(0).poserCarte(rep, this.cartePlateau, this.getCollectionCarte());
 								choixJoueur = true;
 							
 							}
-							else if(this.listeJoueur.get(0).main.get(rep).origineCarte ==3){ // Si on a une carte d'origine Néant
+							else if(this.listeJoueur.get(0).main.get(rep).origineCarte ==3){ // Si on a une carte d'origine Nï¿½ant
 								if(this.listeJoueur.get(0).nombrePointAction[1]>=2){ // On regarde si on a assez de point d'action Jour
 									this.listeJoueur.get(0).setPointAction(1, -2); // Si c'est le cas, on en retire 2
 									this.listeJoueur.get(0).poserCarte(rep,this.cartePlateau, this.getCollectionCarte()); // On pose la carte
@@ -531,7 +531,7 @@ public class Partie{
 					}
 					break;
 				case 2: // Si on choisi 2, on veut sacrifier une carte
-					if (poserApocalypse == false){ // Si on est pas obligé de poser une carte apocalypse, /!\ PAS OBLIGER D'UTILISER EFFET DIVINITE /!\
+					if (poserApocalypse == false){ // Si on est pas obligï¿½ de poser une carte apocalypse, /!\ PAS OBLIGER D'UTILISER EFFET DIVINITE /!\
 						System.out.println("Voulez-vous sacrifier un croyant (1) ou un guide (2) ?");
 						rep = sc.nextInt();
 						if ( rep == 1){
@@ -559,7 +559,7 @@ public class Partie{
 						// Retour aux choix
 					}
 					break;
-				case 3: // Si on choisi 3, on veut utiliser l'effet divinité
+				case 3: // Si on choisi 3, on veut utiliser l'effet divinitï¿½
 					if ( sacrifierCarte == false && poserApocalypse ==false && sacrifierGuide == false && effetDivinite ==false){
 						this.listeJoueur.get(0).Divinite.utiliserEffet();
 						choixJoueur=true;
@@ -570,7 +570,7 @@ public class Partie{
 					}
 					
 					break;
-				case 4: // On décide de sauter son tour
+				case 4: // On dï¿½cide de sauter son tour
 					System.out.println("Vous passez votre tour");
 					choixJoueur = true;
 					break;
@@ -594,7 +594,7 @@ public class Partie{
 			}
 			else{
 					System.out.println("Le joueur blabla fait ceci");
-				// On fait jouer les autres joueurs avec leur stratégie
+				// On fait jouer les autres joueurs avec leur stratï¿½gie
 			}
 			
 			
@@ -608,19 +608,19 @@ public class Partie{
 		
 	}
 	
-	// Méthode pour mélanger les cartes action et divinités
+	// Mï¿½thode pour mï¿½langer les cartes action et divinitï¿½s
 	public void melangerDeck(){
-	Collections.shuffle(collectionCarte); // On mélange la liste des cartes action du deck
-	Collections.shuffle(collectionCarteDivinite); // On mélange la liste des cartes divinités du deck
+	Collections.shuffle(collectionCarte); // On mï¿½lange la liste des cartes action du deck
+	Collections.shuffle(collectionCarteDivinite); // On mï¿½lange la liste des cartes divinitï¿½s du deck
 	}
 	
-	// Méthode pour créer la liste des joueurs
+	// Mï¿½thode pour crï¿½er la liste des joueurs
 	public void creerListeJoueur( int nombreJoueur){
 		listeJoueur = new ArrayList<Joueur>();
 		tourJoueur = new ArrayList<Joueur>();
 		for (int i=0; i<nombreJoueur; i++)
 		{
-		player = new Joueur(); // On crée le joueur numéro i
+		player = new Joueur(); // On crï¿½e le joueur numï¿½ro i
 		player.setNom(i); // On le nomme "Joueur i "
 		listeJoueur.add(player); // On le rajoute dans la liste des joueurs
 		tourJoueur.add(player); // On le rajoute dans la liste des tours du joueur
@@ -628,27 +628,27 @@ public class Partie{
 	}
 
 
-	// Methode pour distribuer carte Divinité
+	// Methode pour distribuer carte Divinitï¿½
 	public void distribuerDivinite(){
 		 for (int i=0; i<listeJoueur.size();i++){
-			 listeJoueur.get(i).setDivinite(collectionCarteDivinite.get(0)); // On attribut au joueur sa carte divinité
-			 collectionCarteDivinite.remove(0); // On enlève alors cette carte de la liste des cartes Divinités
+			 listeJoueur.get(i).setDivinite(collectionCarteDivinite.get(0)); // On attribut au joueur sa carte divinitï¿½
+			 collectionCarteDivinite.remove(0); // On enlï¿½ve alors cette carte de la liste des cartes Divinitï¿½s
 		}	
 	}
 	
 	// Methode pour distribuer cartes
 	public void distribuerCarte(){
-		for (int i=0; i<listeJoueur.size(); i++){ // On répète l'opération pour plusieurs chaque joueur de la liste
+		for (int i=0; i<listeJoueur.size(); i++){ // On rï¿½pï¿½te l'opï¿½ration pour plusieurs chaque joueur de la liste
 			int nombre = listeJoueur.get(i).getMain().size();
-			//int nombre = listeJoueur.get(i).getMain().size(); // On met dans une variable le nombre de carte que possède le joueur i 
-			while(nombre < 7){ // Tant que le joueur n'a pas 7 cartes, on répète l'opération
+			//int nombre = listeJoueur.get(i).getMain().size(); // On met dans une variable le nombre de carte que possï¿½de le joueur i 
+			while(nombre < 7){ // Tant que le joueur n'a pas 7 cartes, on rï¿½pï¿½te l'opï¿½ration
 				
 				
 				listeJoueur.get(i).getMain().add(this.collectionCarte.get(0)); // On donne cette carte au joueur i
-				collectionCarte.remove(0); // On enlève cette carte de la liste
+				collectionCarte.remove(0); // On enlï¿½ve cette carte de la liste
 				nombre++;	
 			}
-			// Pour chaque joueur, on prend la carte 1 de la collection, on la stock dans carte 0, et on ajoute la carte 0 dans la collection main , on répète ça tant que la taille de collection main <=7 fois 
+			// Pour chaque joueur, on prend la carte 1 de la collection, on la stock dans carte 0, et on ajoute la carte 0 dans la collection main , on rï¿½pï¿½te ï¿½a tant que la taille de collection main <=7 fois 
 		}
 	}
 	
@@ -657,7 +657,7 @@ public class Partie{
 		return collectionCarte;
 	}
 
-	public ArrayList<Joueur> getListeJoueur(){
+	public  ArrayList<Joueur> getListeJoueur(){
 		return listeJoueur;
 	}
 	
