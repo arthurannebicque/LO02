@@ -157,13 +157,13 @@ public class Joueur implements Strategie {
 	}
 	
 	public void sacrifierCarte(int id, Partie p){
-		this.main.get(id).utiliserEffet();
+		//this.main.get(id).utiliserEffet();
 		this.defausserCarte(id, p.getcollectionCarte());
 	}
 	// Creation d'un setter pour nommer le Joueur (Joueur 1 , 2 , 3 ...)
 	
 	public void utiliserEffetDivinite(){
-		this.getDivinite().utiliserEffet();
+		//this.getDivinite().utiliserEffet();
 	}
 	
 	

@@ -11,7 +11,7 @@ public class Effet7 extends Croyant { // id =24 Defausse un guide spirituel d'un
 			cible.guidePossede.get(0).croyantPossede.remove(i);
 
 		}
-		cible.defausserCarte(cible.guidePossede.get(0), collectionCarte);
+		//cible.defausserCarte(cible.guidePossede.get(0), collectionCarte);
 
 	}
 }

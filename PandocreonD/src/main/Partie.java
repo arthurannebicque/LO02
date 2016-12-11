@@ -338,7 +338,7 @@ public class Partie{
 	
 	public void demarrerPartie(){
 		
-		System.out.println(" Pandocreon Divinae \n Combien de joueur ?");
+		System.out.println(" Pandocreon Divinae \n Indiquez le nombre de joueur");
 		sc = new Scanner(System.in);
 		String reponse = sc.nextLine();
 		int rep = Integer.parseInt(reponse); // On transforme la r�ponse en int
@@ -352,8 +352,12 @@ public class Partie{
 		cartePlateau = new ArrayList<Carte>();
 		
 				
-		System.out.println("Vous �tes le joueur " +this.listeJoueur.get(0).getString());
-		System.out.println("Vous avez eu la carte divinit�: \n" +this.listeJoueur.get(0).getInfosDivinite());
+		System.out.println("Vous etes le joueur " +this.listeJoueur.get(0).getString());
+		System.out.println("Vous avez eu la carte divinité: \n" +this.listeJoueur.get(0).getInfosDivinite());
+		System.out.println("Aide :");
+		System.out.println("Origines : 1 = Jour, 2 = Néant, 3 = Nuit, 4 = Aube, 5 = Crépuscule");
+		System.out.println("Dogmes : 1 = Nature, 2 = Chaos, 3 = Symboles, 4 = Mystique, 5 = Humain");
+		System.out.println("Types de Carte : 1 - 37 = Croyants, 38 - 57 = Guide Spirituel, 58 - 75 = Guide Spirituel, 76 - 80 = Apocalypse\n");
 		int nbreTour=1;
 		
 		
@@ -371,7 +375,7 @@ public class Partie{
 		System.out.println("Vous avez les cartes:\n ");
 		
 		for (int i=0; i<7 ; i++){
-		System.out.printf("\n "+(i)+ " - " +this.listeJoueur.get(0).main.get(i).getIdentifiantCarte()+ "\n");
+		System.out.printf("\nPosition dans votre main : "+(i)+ " - Identifiant de la carte : " +this.listeJoueur.get(0).main.get(i).getIdentifiantCarte()+ "\n");
 		System.out.println(this.listeJoueur.get(0).main.get(i).getInfosCarte());
 		}
 		
@@ -399,7 +403,7 @@ public class Partie{
 		System.out.println("Vous avez les cartes:\n ");
 	
 		for (int j=0; j<this.listeJoueur.get(0).main.size() ; j++){
-			System.out.printf("\n "+(j)+ " - " +this.listeJoueur.get(0).main.get(j).getIdentifiantCarte()+ " | ");
+			System.out.println("\nPosition dans votre main : "+(j)+ " - identifiant de la carte : " +this.listeJoueur.get(0).main.get(j).getIdentifiantCarte());
 			System.out.println("\n" +this.listeJoueur.get(0).main.get(j).getInfosCarte());
 		}
 		
@@ -417,11 +421,19 @@ public class Partie{
 			System.out.println("\n Influence: N�ant ! \n Les divinit�s d'origine Aube gagnent 1 point action Neant (3)! \n Les divinit�s d'origine Cr�puscule gagnent 1 point d'action N�ant");
 		}
 		
-		System.out.println("/// Sur le plateau, il y a " +this.cartePlateau.size()+ " cartes croyants ///");
+		System.out.println("/// Sur le plateau, il y a " +this.cartePlateau.size()+ " cartes croyants : ");
+		for (i=0; i<this.cartePlateau.size(); i++){
+			System.out.println("\nPosition : "+(i)+ " - Identifiant de la carte : " +this.cartePlateau.get(i).getIdentifiantCarte());
+			System.out.println(this.cartePlateau.get(i).getInfosCarte());
+			}
 		
 		// On indique combien chaque joueur a de guide et de croyants
 		for ( int n=0; n<listeJoueur.size();n++){
 			System.out.println("/// Le "+this.listeJoueur.get(n).getNom()+ " a "+this.listeJoueur.get(n).getNombreCroyantTotal()+ " croyants et " +this.listeJoueur.get(n).getNombreGuide()+ " guides///");
+			for ( i=0; i<listeJoueur.get(n).guidePossede.size(); i++){
+				System.out.println("\nPosition : "+(i)+ " - Identifiant de la carte : " +this.listeJoueur.get(n).guidePossede.get(i).getIdentifiantCarte()+ "\n");
+				System.out.println(this.listeJoueur.get(n).guidePossede.get(i).getInfosCarte());
+				}
 		}
 		
 		System.out.println(this.listeJoueur.get(0).getPointsAction());
@@ -536,19 +548,37 @@ public class Partie{
 						rep = sc.nextInt();
 						if ( rep == 1){
 							// On affiche la liste des guides et leur croyants
+							for ( i=0; i<listeJoueur.get(0).guidePossede.size(); i++){
+								System.out.println("\nPosition : "+(i)+ " - Identifiant de la carte : " +this.listeJoueur.get(0).guidePossede.get(i).getIdentifiantCarte()+ "\n");
+								System.out.println(this.listeJoueur.get(0).guidePossede.get(i).getInfosCarte());
+								}
 							System.out.println("Selectionnez le guide du croyant");
 							rep = sc.nextInt();
 							// On affiche les croyants suivi par le guide (rep)
+							for ( i=0; i<listeJoueur.get(0).guidePossede.get(rep).croyantPossede.size(); i++){
+								System.out.println("\nPosition : "+(i)+ " - Identifiant de la carte : " +this.listeJoueur.get(0).guidePossede.get(rep).croyantPossede.get(i).getIdentifiantCarte()+ "\n");
+								System.out.println(this.listeJoueur.get(0).guidePossede.get(rep).croyantPossede.get(i).getInfosCarte());
+								}
 							System.out.println("Selectionnez le croyant");
 							int rep2 = sc.nextInt();
-							this.listeJoueur.get(0).guidePossede.get(rep).croyantPossede.get(rep2).utiliserEffet();
+							//this.listeJoueur.get(0).guidePossede.get(rep).croyantPossede.get(rep2).utiliserEffet();
 							choixJoueur = true;
 						}
 						else if( rep == 2){
 							// On affiche la liste des guides et leurs croyants
+							for ( i=0; i<listeJoueur.get(0).guidePossede.size(); i++){
+								System.out.println("\nPosition : "+(i)+ " - Identifiant de la carte : " +this.listeJoueur.get(0).guidePossede.get(i).getIdentifiantCarte()+ "\n");
+								System.out.println(this.listeJoueur.get(0).guidePossede.get(i).getInfosCarte());
+								
+								for ( j=0; j<listeJoueur.get(0).guidePossede.get(i).croyantPossede.size(); j++){
+									System.out.println("\n    Position : "+(j)+ " - Identifiant de la carte : " +this.listeJoueur.get(0).guidePossede.get(rep).croyantPossede.get(j).getIdentifiantCarte()+ "\n");
+									System.out.println("    " +this.listeJoueur.get(0).guidePossede.get(rep).croyantPossede.get(j).getInfosCarte());
+									}
+								System.out.println("____");
+								}
 							System.out.println("Selectionnez le guide");
 							rep = sc.nextInt();
-							this.listeJoueur.get(0).guidePossede.get(rep).utiliserEffet();
+							//this.listeJoueur.get(0).guidePossede.get(rep).utiliserEffet();
 							choixJoueur = true;
 							}
 						else{
@@ -561,7 +591,7 @@ public class Partie{
 					break;
 				case 3: // Si on choisi 3, on veut utiliser l'effet divinit�
 					if ( sacrifierCarte == false && poserApocalypse ==false && sacrifierGuide == false && effetDivinite ==false){
-						this.listeJoueur.get(0).Divinite.utiliserEffet();
+						//this.listeJoueur.get(0).Divinite.utiliserEffet();
 						choixJoueur=true;
 						effetDivinite = true;
 					}
